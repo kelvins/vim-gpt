@@ -32,7 +32,7 @@ endfunction
 function! PerformOpenAIRequest(prompt)
   let l:json_parser = 'jq -r ".choices[0].message.content"'
   let l:command = BuildOpenAIRequest(a:prompt) . " | " . l:json_parser
-  "return split(l:command, "\n")
+  " return split(l:command, "\n")
   return split(system(l:command), "\n")
 endfunction
 
@@ -42,6 +42,11 @@ function! PopupFilter(winid, key)
     call popup_close(a:winid)
     return 1
   endif
+  if a:key == 'w'
+    call popup_close(a:winid)
+    call append(line('$'), s:result)
+    return 1
+  endif
   return 0
 endfunction
 
@@ -49,6 +54,7 @@ function! GPT(...)
   " highlight MyPopup ctermfg=black ctermbg=
   let l:popup_settings = {
     \ "filter": "PopupFilter",
+    \ "title": "Preview",
     \ "border": [],
     \ "borderchars": ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
     \ "pos": "center",
@@ -59,6 +65,6 @@ function! GPT(...)
     \ }
   let l:prompt = join(a:000, " ")
   call popup_clear()
-  let l:result = PerformOpenAIRequest(l:prompt)
-  call popup_create(l:result, l:popup_settings)
+  let s:result = PerformOpenAIRequest(l:prompt)
+  call popup_create(s:result, l:popup_settings)
 endfunction
