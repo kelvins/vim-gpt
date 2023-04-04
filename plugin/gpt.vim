@@ -6,7 +6,7 @@ let s:envars = environ()
 " Global OpenAI variables
 let g:openai_model = "gpt-3.5-turbo"
 let g:openai_temperature = 0.7
-let g:openai_api_key = s:envars["OPENAI_API_KEY"]
+let g:openai_api_key = get(s:envars, "OPENAI_API_KEY", "")
 
 let s:openai_url = "https://api.openai.com/v1/chat/completions"
 
@@ -56,6 +56,11 @@ function! FormatPrompt(prompt)
 endfunction
 
 function! GPT(...)
+  if g:openai_api_key == ""
+    echom "OPENAI_API_KEY not defined!"
+    return
+  endif
+
   let l:popup_settings = {
     \ "filter": "PopupFilter",
     \ "title": "Preview",
@@ -75,7 +80,7 @@ function! GPT(...)
   let s:result = PerformOpenAIRequest(l:prompt)
 
   if s:result == ["null"]
-    echom "Request Error! Please try again!"
+    echom "Something went wrong! Please try again!"
   else
     call popup_create(s:result, l:popup_settings)
   endif
