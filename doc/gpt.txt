@@ -1,0 +1,62 @@
+*gpt.txt*  Plugin for using GPT through OpenAI API
+
+Author: Kelvin Salton <http://github.com/kelvins>
+
+====================================================================================
+INTRODUCTION
+
+*gpt.vim* allows you to use Generative Pre-trained Transformer (GPT) from OpenAI API.
+
+This project depends on `curl` and `jq`, so make sure you have it installed on your
+operation system.
+
+You'll also need an OpenAI account to generate an API key:
+
+        https://platform.openai.com/account/api-keys
+
+Then set the `$OPENAI_API_KEY` environment variable, for example:
+
+        `export OPENAI_API_KEY=s4jyM5kSMbw7MG6Uqv3bw3T3B4b4F6X9pLpz36vr8eaKzXPC`
+
+====================================================================================
+USAGE
+
+*gpt.vim* is very simple. There's a single entry point called *:GPT*.
+
+In normal mode just type *:GPT* and enter your sentence. It will open a preview
+popup so you can type `q` to close the popup and ignore the content or `w`
+to close the popup and write the content to the current buffer.
+
+:GPT {prompt}
+
+        Call OpenAI API sending the provided prompt.
+
+        Example:
+
+            :GPT write a Clojure function to calculate the product of two vectors
+
+====================================================================================
+CUSTOMIZING
+
+*g:openai_model* (default: "gpt-3.5-turbo")
+
+        The model to use for completions.
+
+        For more info, see https://platform.openai.com/docs/models/overview
+
+        Example: `let g:openai_model="gpt-3.5-turbo"`
+
+*g:openai_api_key* (default: "$OPENAI_API_KEY")
+
+        The API key used for authentication.
+
+        For more info, see https://platform.openai.com/account/api-keys
+
+        Example: `let g:openai_api_key="s4jyM5kSMbw7MG6Uqv3bw3T3B4b4F6X9pLpz36vr8eaKzXPC"`
+
+*g:openai_temperature* (default: 0.7)
+
+        Controls randomness of output, between 0 and 1. Lower values will be
+        more deterministic and higher values will take more creative risks.
+
+        Example: `let g:openai_temperature=0.7`
