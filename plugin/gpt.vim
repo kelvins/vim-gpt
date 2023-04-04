@@ -51,8 +51,11 @@ function! PopupFilter(winid, key)
   return 0
 endfunction
 
+function! FormatPrompt(prompt)
+  return substitute(join(a:prompt, " "), "\"", "'", "g")
+endfunction
+
 function! GPT(...)
-  " highlight MyPopup ctermfg=black ctermbg=
   let l:popup_settings = {
     \ "filter": "PopupFilter",
     \ "title": "Preview",
@@ -64,8 +67,16 @@ function! GPT(...)
     \ "minheight": 20,
     \ "maxheight": 20,
     \ }
-  let l:prompt = join(a:000, " ")
+
+  let l:prompt = FormatPrompt(a:000)
+
   call popup_clear()
+
   let s:result = PerformOpenAIRequest(l:prompt)
-  call popup_create(s:result, l:popup_settings)
+
+  if s:result == ["null"]
+    echom "Request Error! Please try again!"
+  else
+    call popup_create(s:result, l:popup_settings)
+  endif
 endfunction
