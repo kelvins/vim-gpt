@@ -5,6 +5,7 @@ let s:envars = environ()
 
 " Global OpenAI variables
 let g:openai_model = "gpt-3.5-turbo"
+let g:openai_temperature = 0.7
 let g:openai_api_key = s:envars["OPENAI_API_KEY"]
 
 let s:openai_url = "https://api.openai.com/v1/chat/completions"
@@ -16,7 +17,7 @@ command! -nargs=+ GPT call GPT(<f-args>)
 function! BuildOpenAIRequest(prompt)
   let l:payload = [
     \ "{\\\"model\\\": \\\"" . g:openai_model . "\\\",",
-    \ "\\\"temperature\\\": 0.7,",
+    \ "\\\"temperature\\\": " . g:openai_temperature . ",",
     \ "\\\"messages\\\": [{\\\"role\\\": \\\"user\\\", \\\"content\\\": \\\"" . a:prompt . "\\\"}]}",
     \ ]
   let l:command = [
