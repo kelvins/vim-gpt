@@ -10,6 +10,12 @@ A Vim plugin for using Generative Pre-trained Transformer (GPT) from OpenAI API.
 Plug 'kelvins/vim-gpt'
 ```
 
+[Vundle](https://github.com/VundleVim/Vundle.vim)
+
+```
+Plugin 'kelvins/vim-gpt'
+```
+
 ### Dependencies
 
 - `curl`: to execute HTTP requests to the OpenAI API.
