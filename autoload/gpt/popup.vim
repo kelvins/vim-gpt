@@ -29,5 +29,5 @@ endfunction
 function! gpt#popup#create(content)
     call popup_clear()
     let l:winid = popup_create(a:content, s:popup_settings)
-	call setwinvar(l:winid, '&wincolor', g:gpt_preview_wincolor)
+    call setwinvar(l:winid, '&wincolor', g:gpt_preview_wincolor)
 endfunction

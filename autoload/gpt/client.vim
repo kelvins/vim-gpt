@@ -21,6 +21,5 @@ endfunction
 function! gpt#client#request(prompt)
     let l:json_parser = 'jq -r ".choices[0].message.content"'
     let l:command = gpt#client#build(a:prompt) . " | " . l:json_parser
-    return [l:command]
-    "return split(system(l:command), "\n")
+    return split(system(l:command), "\n")
 endfunction
