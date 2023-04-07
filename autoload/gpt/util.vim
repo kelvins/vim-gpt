@@ -14,5 +14,5 @@ function! gpt#util#prompt()
 endfunction
 
 function! gpt#util#write(content)
-    call append(line('$'), a:content)
+    call append(line('.'), a:content)
 endfunction

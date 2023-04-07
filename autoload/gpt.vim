@@ -24,9 +24,9 @@ function! gpt#GPT()
 
     call gpt#util#echo("Requesting...")
 
-    let s:response = gpt#client#request(l:prompt)
+    let l:response = gpt#client#request(l:prompt)
 
-    if s:response == ["null"]
+    if l:response == ["null"]
         call gpt#util#echo("Something went wrong! Please try again!")
         return
     else
@@ -34,8 +34,8 @@ function! gpt#GPT()
     endif
 
     if g:gpt_preview == 1
-        call gpt#popup#create(s:response)
+        call gpt#popup#create(l:response)
     else
-        call gpt#util#write(s:response)
+        call gpt#util#write(l:response)
     endif
 endfunction
