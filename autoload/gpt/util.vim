@@ -12,3 +12,7 @@ function! gpt#util#prompt()
     call inputrestore()
     return substitute(l:prompt, "\"", "'", "g")
 endfunction
+
+function! gpt#util#write(content)
+    call append(line('$'), a:content)
+endfunction

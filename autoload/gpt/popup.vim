@@ -11,16 +11,16 @@ let s:popup_settings = {
     \ "maxwidth": 80,
     \ "minheight": 20,
     \ "maxheight": 20,
+    \ "scrollbar": 1,
     \ }
 
 function! gpt#popup#filter(winid, key)
     if a:key == 'q'
         call popup_close(a:winid)
         return 1
-    endif
-    if a:key == 'w'
+    elseif a:key == 'w'
         call popup_close(a:winid)
-        call append(line('$'), s:response)
+        call gpt#util#write(s:response)
         return 1
     endif
     return 0
@@ -28,7 +28,6 @@ endfunction
 
 function! gpt#popup#create(content)
     call popup_clear()
-    let winid = popup_create(a:content, s:popup_settings)
-    call win_execute(winid, 'syntax enable')
-    hi Pmenu ctermbg=gray
+    let l:winid = popup_create(a:content, s:popup_settings)
+	call setwinvar(l:winid, '&wincolor', g:gpt_preview_wincolor)
 endfunction
