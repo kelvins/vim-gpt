@@ -31,13 +31,21 @@ export OPENAI_API_KEY=s4jyM5kSMbw7MG6Uqv3bw3T3B4b4F6X9pLpz36vr8eaKzXPC
 
 ## Usage
 
-In Vim normal mode just type `:GPT` and the text you want to send to the API, for example:
+In Vim normal mode just type `:GPT` and an input prompt will be displayed, just type the content you want to send and hit `Enter`, for example:
 
 ```
-:GPT Write a hello world function in Rust
+Prompt: Write a Hello World function in Rust
 ```
 
-It will open a popup window with a response preview and you can type `q` to ignore and close the popup or `w` to close the popup and copy the content to the current buffer.
+It will open a popup window with a response preview so you can type `q` to ignore and close the popup or `w` to close the popup and copy the content to the current buffer.
+
+### Tip
+
+You can map a shortcut like `ctrl + g`, in your `~/.vimrc` file, to open the prompt, for example:
+
+```
+nnoremap <C-g> <ESC>:GPT<CR>
+```
 
 ## Disclaimers
 

@@ -23,17 +23,19 @@ USAGE
 
 *gpt.vim* is very simple. There's a single entry point called *:GPT*.
 
-In normal mode just type *:GPT* and enter your sentence. It will open a preview
-popup so you can type `q` to close the popup and ignore the content or `w`
-to close the popup and write the content to the current buffer.
+In normal mode just type *:GPT* to open a prompt and the enter the content you want.
+After inserting the content and hitting enter it will open a preview popup so you
+can type `q` to close the popup and ignore the content or `w` to close the popup and
+write the content to the current buffer.
 
-:GPT {prompt}
+:GPT
 
-        Call OpenAI API sending the provided prompt.
+        Open an input prompt to enter the content that will be sent to OpenAI API.
 
         Example:
 
-            :GPT write a Clojure function to calculate the product of two vectors
+            :GPT
+            Prompt: Write a Clojure function to calculate the product of two vectors
 
 ====================================================================================
 CUSTOMIZING

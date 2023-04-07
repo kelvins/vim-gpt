@@ -8,4 +8,4 @@ endif
 let g:loaded_gpt = 1
 
 " GPT command must be called with at least 1 argument
-command! -nargs=+ GPT call gpt#GPT(<f-args>)
+command! -nargs=0 GPT call gpt#GPT()

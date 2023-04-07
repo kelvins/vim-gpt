@@ -1,3 +1,5 @@
+" Author: Kelvin Salton <http://github.com/kelvins>
+" Plugin: https://github.com/kelvins/vim-gpt
 
 let s:envars = environ()
 
@@ -28,7 +30,6 @@ endfunction
 function! PerformOpenAIRequest(prompt)
     let l:json_parser = 'jq -r ".choices[0].message.content"'
     let l:command = BuildOpenAIRequest(a:prompt) . " | " . l:json_parser
-    " return split(l:command, "\n")
     return split(system(l:command), "\n")
 endfunction
 
@@ -46,11 +47,14 @@ function! PopupFilter(winid, key)
     return 0
 endfunction
 
-function! FormatPrompt(prompt)
-    return substitute(join(a:prompt, " "), "\"", "'", "g")
+function! GPTPrompt()
+    call inputsave()
+    let l:prompt = input('Prompt: ')
+    call inputrestore()
+    return substitute(l:prompt, "\"", "'", "g")
 endfunction
 
-function! gpt#GPT(...)
+function! gpt#GPT()
     if g:openai_api_key == ""
         echom "OPENAI_API_KEY not defined!"
         return
@@ -58,7 +62,7 @@ function! gpt#GPT(...)
 
     let l:popup_settings = {
         \ "filter": "PopupFilter",
-        \ "title": "Preview (q-quit / w-write)",
+        \ "title": "Preview (q-quit/w-write)",
         \ "border": [],
         \ "borderchars": ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
         \ "pos": "center",
@@ -68,7 +72,10 @@ function! gpt#GPT(...)
         \ "maxheight": 20,
         \ }
 
-    let l:prompt = FormatPrompt(a:000)
+    let l:prompt = GPTPrompt()
+
+    redraw
+    echom "Requesting..."
 
     call popup_clear()
 
