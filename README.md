@@ -2,6 +2,8 @@
 
 A Vim plugin for using Generative Pre-trained Transformer (GPT) from OpenAI API.
 
+![Demo GIF](imgs/demo.gif)
+
 ## Installation
 
 [vim-plug](https://github.com/junegunn/vim-plug)
